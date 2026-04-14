@@ -66,15 +66,25 @@
 </head>
 <body>
 
-<iframe id="yt-player" width="1" height="1" style="position:fixed;top:-9999px;left:-9999px;" src="https://www.youtube.com/embed/1QYBiNRu1ok?autoplay=1&loop=1&playlist=1QYBiNRu1ok&controls=0" allow="autoplay" frameborder="0"></iframe>
+<audio id="cancion" src="seven.mp3" loop></audio>
 
-<div class="music-bar">
+<div class="music-bar" id="music-bar" style="display:none;">
   <span class="music-note">🎵</span>
   <div>
-    <div class="music-title">Jung Kook (BTS) — Canción</div>
+    <div class="music-title">Jung Kook — Seven</div>
     <div style="font-size:10px; color:#f9a8d4;">♫ sonando para ti...</div>
   </div>
   <button class="music-btn" id="music-toggle" onclick="toggleMusic()">⏸</button>
+</div>
+
+<div id="pantalla-inicio" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(160deg,#fff0f5,#fce4ec);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;">
+  <div style="font-size:70px; animation:latir 1.2s ease-in-out infinite; display:inline-block; margin-bottom:16px;">🌸</div>
+  <h1 style="font-family:'Dancing Script',cursive; font-size:44px; color:#d4537e; margin:0 0 8px;">Stephanie</h1>
+  <p style="font-size:14px; color:#e8829a; margin:0 0 10px; letter-spacing:2px;">tienes un mensaje especial</p>
+  <p style="font-size:12px; color:#f9a8d4; margin:0 0 32px;">🎵 Con música de Jung Kook</p>
+  <button onclick="iniciarConMusica()" style="background:linear-gradient(135deg,#f06292,#e91e63);color:white;border:none;padding:18px 44px;border-radius:50px;font-size:18px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 8px 25px rgba(233,30,99,0.35);animation:flotar 2s ease-in-out infinite;">
+    💌 Abrir mensaje
+  </button>
 </div>
 
 <div id="petals-container"></div>
@@ -173,16 +183,25 @@
 </div>
 
 <script>
-  let musicPlaying = true;
+  let musicPlaying = false;
+
+  function iniciarConMusica() {
+    document.getElementById('pantalla-inicio').style.display = 'none';
+    document.getElementById('music-bar').style.display = 'flex';
+    const audio = document.getElementById('cancion');
+    audio.play();
+    musicPlaying = true;
+  }
+
   function toggleMusic() {
-    const iframe = document.getElementById('yt-player');
+    const audio = document.getElementById('cancion');
     const btn = document.getElementById('music-toggle');
     if(musicPlaying) {
-      iframe.src = '';
+      audio.pause();
       btn.textContent = '▶';
       musicPlaying = false;
     } else {
-      iframe.src = 'https://www.youtube.com/embed/1QYBiNRu1ok?autoplay=1&loop=1&playlist=1QYBiNRu1ok&controls=0';
+      audio.play();
       btn.textContent = '⏸';
       musicPlaying = true;
     }
@@ -233,7 +252,5 @@
     }
   }
 </script>
-</body>
-</html>
 </body>
 </html>
