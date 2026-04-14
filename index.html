@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Stephanie 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: linear-gradient(160deg,#fff0f5 0%,#fce4ec 50%,#fff8f0 100%); min-height: 100vh; overflow-x: hidden; }
+
+    @keyframes flotar { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes aparecer { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes latir { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+    @keyframes caer { 0%{opacity:1;transform:translateY(0) rotate(0deg)} 100%{opacity:0;transform:translateY(110vh) rotate(360deg)} }
+
+    .pagina { display:none; padding:40px 24px; text-align:center; max-width:480px; margin:0 auto; animation:aparecer .8s ease; }
+    .pagina.activa { display:block; }
+
+    .card { background:white; border-radius:24px; padding:28px 24px; margin-bottom:20px; border:1px solid #ffd6e7; }
+
+    .btn-principal {
+      background:linear-gradient(135deg,#f06292,#e91e63);
+      color:white; border:none; padding:16px 40px;
+      border-radius:50px; font-size:17px; font-weight:800;
+      cursor:pointer; font-family:'Nunito',sans-serif;
+      animation:flotar 2s ease-in-out infinite;
+      box-shadow:0 8px 25px rgba(233,30,99,0.3);
+    }
+    .btn-principal:hover { transform:scale(1.05); }
+
+    .btn-no {
+      background:white; color:#bbb;
+      border:1px solid #eee; padding:14px 30px;
+      border-radius:50px; font-size:14px;
+      cursor:pointer; font-family:'Nunito',sans-serif;
+      transition:all .15s;
+    }
+
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+    .mini-card { background:white; border-radius:18px; padding:16px; border:1px solid #ffd6e7; }
+    .mini-card .icon { font-size:28px; margin-bottom:6px; }
+    .mini-card p { font-size:13px; color:#888; margin:0; line-height:1.5; }
+
+    .petal { position:fixed; border-radius:50% 0; background:#ffb3c6; animation:caer linear infinite; pointer-events:none; z-index:999; }
+
+    #petals-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:998; }
+
+    h1.titulo { font-family:'Dancing Script',cursive; font-size:48px; color:#d4537e; margin:0 0 6px; }
+    h2.titulo { font-family:'Dancing Script',cursive; font-size:36px; color:#d4537e; margin:0 0 16px; }
+    .subtitulo { font-size:14px; color:#e8829a; letter-spacing:2px; margin:0 0 32px; }
+  </style>
+</head>
+<body>
+
+<div id="petals-container"></div>
+
+<div id="p1" class="pagina activa">
+  <div style="font-size:64px; animation:latir 1.2s ease-in-out infinite; display:inline-block; margin-bottom:8px;">🌸</div>
+  <h1 class="titulo">Stephanie</h1>
+  <p class="subtitulo">tengo algo que decirte...</p>
+
+  <div class="card">
+    <div style="font-size:36px; margin-bottom:12px; animation:flotar 2s ease-in-out infinite; display:inline-block;">🙈</div>
+    <p style="font-size:16px; color:#555; line-height:1.9;">
+      Sé que quizás metí la pata,<br>
+      y que tal vez no lo merezco...<br>
+      pero aquí estoy, con el corazón<br>
+      en la mano, pidiéndote una chance. 💕
+    </p>
+  </div>
+
+  <div class="card">
+    <p style="font-size:15px; color:#777; line-height:1.9; font-style:italic;">
+      "Hay personas que llegan a tu vida<br>
+      y la hacen mejor con solo existir.<br>
+      Tú eres una de esas personas para mí." 🌷
+    </p>
+  </div>
+
+  <button class="btn-principal" onclick="ir('p2')">Ver mi disculpa 🌸</button>
+</div>
+
+<div id="p2" class="pagina">
+  <div style="font-size:54px; margin-bottom:8px;">😔</div>
+  <h2 class="titulo">Lo siento de verdad</h2>
+
+  <div class="card" style="text-align:left;">
+    <p style="font-size:15px; color:#555; line-height:1.9;">
+      Stephanie, reconozco que no actué bien.<br><br>
+      A veces uno no sabe lo que tiene hasta que lo puede perder, y yo no quiero perderte.<br><br>
+      No te pido que olvides, solo que me des la oportunidad de demostrarte que puedo ser mejor. 🌹
+    </p>
+  </div>
+
+  <div class="grid2">
+    <div class="mini-card">
+      <div class="icon">🤝</div>
+      <p>Prometo ser más detallista contigo</p>
+    </div>
+    <div class="mini-card">
+      <div class="icon">👂</div>
+      <p>Prometo escucharte más</p>
+    </div>
+    <div class="mini-card">
+      <div class="icon">💯</div>
+      <p>Prometo ser honesto siempre</p>
+    </div>
+    <div class="mini-card">
+      <div class="icon">🌟</div>
+      <p>Prometo hacerte sonreír cada día</p>
+    </div>
+  </div>
+
+  <button class="btn-principal" onclick="ir('p3')">Hay una pregunta para ti... 💌</button>
+</div>
+
+<div id="p3" class="pagina">
+  <div style="font-size:64px; animation:latir 1s ease-in-out infinite; display:inline-block; margin-bottom:16px;">💕</div>
+  <h2 class="titulo">Stephanie...</h2>
+  <p style="font-size:16px; color:#888; margin:0 0 36px;">¿Me darías una oportunidad? 🥺</p>
+
+  <div style="display:flex; flex-direction:column; gap:14px; max-width:300px; margin:0 auto; position:relative; min-height:160px;">
+    <button class="btn-principal" onclick="respuestaSi()" style="animation:flotar 2s ease-in-out infinite;">
+      💖 ¡Sí, te doy una oportunidad!
+    </button>
+    <button id="btn-no" class="btn-no" onmouseover="escaparNo()" ontouchstart="escaparNo()">
+      No por ahora...
+    </button>
+  </div>
+  <p id="msg-no" style="font-size:13px; color:#ffb3c6; margin-top:16px; min-height:20px;"></p>
+</div>
+
+<div id="p4" class="pagina">
+  <div style="font-size:68px; animation:latir .8s ease-in-out infinite; display:inline-block; margin-bottom:16px;">🎉💖🎉</div>
+  <h2 class="titulo">¡Gracias, Stephanie!</h2>
+
+  <div class="card">
+    <p style="font-size:16px; color:#555; line-height:1.9;">
+      Eres increíble y te lo voy a demostrar cada día. 🌹<br><br>
+      Prometo que no te vas a arrepentir.<br>
+      ¡Gracias por darme esta chance! 💕
+    </p>
+  </div>
+
+  <div style="font-size:36px; letter-spacing:8px; animation:flotar 2s ease-in-out infinite; display:inline-block; margin-top:16px;">
+    🌸💕🌹💕🌸
+  </div>
+</div>
+
+<script>
+  let noCount = 0;
+
+  function ir(id) {
+    document.querySelectorAll('.pagina').forEach(p => p.classList.remove('activa'));
+    document.getElementById(id).classList.add('activa');
+    window.scrollTo(0, 0);
+  }
+
+  function escaparNo() {
+    noCount++;
+    const btn = document.getElementById('btn-no');
+    const container = btn.parentElement;
+    const maxX = Math.max(0, container.offsetWidth - btn.offsetWidth - 10);
+    const maxY = Math.max(0, container.offsetHeight - btn.offsetHeight - 10);
+    btn.style.position = 'absolute';
+    btn.style.left = Math.floor(Math.random() * maxX) + 'px';
+    btn.style.top = Math.floor(Math.random() * maxY + 60) + 'px';
+    btn.style.zIndex = '10';
+    const msgs = ['🥺 Espera...','😅 ¡Atrápame!','🙈 Nooo...','💨 ¡Ni modo!','😂 Sigue intentando...'];
+    document.getElementById('msg-no').textContent = msgs[Math.min(noCount - 1, msgs.length - 1)];
+  }
+
+  function respuestaSi() {
+    ir('p4');
+    lanzarPetalos();
+  }
+
+  function lanzarPetalos() {
+    const container = document.getElementById('petals-container');
+    const colores = ['#ffb3c6','#ff8fab','#ffc8dd','#ffafcc','#f9a8d4','#fbb6ce'];
+    for(let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 8 + Math.random() * 12;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = '-20px';
+      p.style.background = colores[Math.floor(Math.random() * colores.length)];
+      p.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      p.style.animationDelay = (Math.random() * 3) + 's';
+      container.appendChild(p);
+    }
+  }
+</script>
+</body>
+</html>
