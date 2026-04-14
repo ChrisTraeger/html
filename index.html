@@ -146,7 +146,27 @@
     </div>
   </div>
 
-  <button class="btn-principal" onclick="ir('p3')">Hay una pregunta para ti... 💌</button>
+  <button class="btn-principal" onclick="ir('juego')">Hay una pregunta para ti... 💌</button>
+</div>
+
+<div id="juego" class="pagina">
+  <h2 class="titulo">¡Atrapa los corazones! 💕</h2>
+  <p style="font-size:14px; color:#888; margin:0 0 8px;">Atrapa <span id="meta-num">7</span> corazones para ver la pregunta</p>
+  <div style="display:flex; justify-content:center; gap:16px; margin-bottom:16px;">
+    <div style="background:#fff0f5; border-radius:20px; padding:10px 22px; border:1px solid #ffd6e7;">
+      <span style="font-size:12px; color:#888;">Atrapados</span><br>
+      <span id="score" style="font-size:28px; font-weight:800; color:#d4537e;">0</span>
+    </div>
+    <div style="background:#fff0f5; border-radius:20px; padding:10px 22px; border:1px solid #ffd6e7;">
+      <span style="font-size:12px; color:#888;">Tiempo</span><br>
+      <span id="timer" style="font-size:28px; font-weight:800; color:#d4537e;">15</span>
+    </div>
+  </div>
+  <div id="game-area" style="position:relative; width:100%; height:320px; background:white; border-radius:24px; border:2px solid #ffd6e7; overflow:hidden; touch-action:none;">
+    <p id="game-msg" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:15px; color:#ffb3c6; text-align:center; width:80%;">Toca los corazones<br>antes de que escapen 🌸</p>
+  </div>
+  <button id="btn-jugar" class="btn-principal" onclick="iniciarJuego()" style="margin-top:20px;">¡Jugar! 💖</button>
+  <p id="juego-msg" style="font-size:13px; color:#f9a8d4; margin-top:12px; min-height:20px;"></p>
 </div>
 
 <div id="p3" class="pagina">
@@ -208,6 +228,75 @@
   }
 
   let noCount = 0;
+  let gameScore = 0;
+  let gameTimer = 15;
+  let gameInterval = null;
+  let timerInterval = null;
+  const META = 7;
+
+  function iniciarJuego() {
+    gameScore = 0;
+    gameTimer = 15;
+    document.getElementById('score').textContent = '0';
+    document.getElementById('timer').textContent = '15';
+    document.getElementById('juego-msg').textContent = '';
+    document.getElementById('btn-jugar').style.display = 'none';
+    document.getElementById('game-msg').style.display = 'none';
+    const area = document.getElementById('game-area');
+    area.querySelectorAll('.corazon').forEach(c => c.remove());
+
+    gameInterval = setInterval(() => spawnCorazon(), 600);
+    timerInterval = setInterval(() => {
+      gameTimer--;
+      document.getElementById('timer').textContent = gameTimer;
+      if(gameTimer <= 0) terminarJuego();
+    }, 1000);
+  }
+
+  function spawnCorazon() {
+    const area = document.getElementById('game-area');
+    const emojis = ['💕','💖','💗','💓','❤️','🌸','💝'];
+    const el = document.createElement('div');
+    el.className = 'corazon';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    const size = 36 + Math.floor(Math.random() * 20);
+    el.style.cssText = `position:absolute; font-size:${size}px; cursor:pointer; user-select:none; transition:transform .1s;`;
+    el.style.left = Math.random() * (area.offsetWidth - 60) + 'px';
+    el.style.top = Math.random() * (area.offsetHeight - 60) + 'px';
+    el.addEventListener('click', () => atraparCorazon(el));
+    el.addEventListener('touchstart', (e) => { e.preventDefault(); atraparCorazon(el); });
+    area.appendChild(el);
+    setTimeout(() => { if(el.parentNode) el.remove(); }, 1800);
+  }
+
+  function atraparCorazon(el) {
+    if(!el.parentNode) return;
+    el.style.transform = 'scale(1.5)';
+    el.style.opacity = '0';
+    setTimeout(() => el.remove(), 200);
+    gameScore++;
+    document.getElementById('score').textContent = gameScore;
+    if(gameScore >= META) terminarJuego(true);
+  }
+
+  function terminarJuego(gano = false) {
+    clearInterval(gameInterval);
+    clearInterval(timerInterval);
+    const area = document.getElementById('game-area');
+    area.querySelectorAll('.corazon').forEach(c => c.remove());
+    document.getElementById('btn-jugar').style.display = 'inline-block';
+
+    if(gano || gameScore >= META) {
+      document.getElementById('juego-msg').textContent = '🎉 ¡Lo lograste! Ahora viene la pregunta...';
+      document.getElementById('btn-jugar').textContent = '¡Ver la pregunta! 💌';
+      document.getElementById('btn-jugar').onclick = () => ir('p3');
+    } else {
+      document.getElementById('juego-msg').textContent = `Atrapaste ${gameScore} 💕 ¡Inténtalo de nuevo!`;
+      document.getElementById('btn-jugar').textContent = '¡Otra vez! 💖';
+      document.getElementById('btn-jugar').onclick = iniciarJuego;
+      document.getElementById('game-msg').style.display = 'block';
+    }
+  }
 
   function ir(id) {
     document.querySelectorAll('.pagina').forEach(p => p.classList.remove('activa'));
